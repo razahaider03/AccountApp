@@ -2,6 +2,8 @@ package com.example.accountapp.logic;
 
 import com.example.accountapp.ui.OutputInterface;
 
+import static com.example.accountapp.logic.Account.tripleIt;
+
 /**
  * This is where the logic of this App is centralized.
  * <p/>
@@ -10,14 +12,16 @@ import com.example.accountapp.ui.OutputInterface;
  * you to first learn key 'Java' features without having to beforehand
  * learn the complexities of Android.
  */
-public class Logic
-       implements LogicInterface {
+public
+class Logic
+        implements LogicInterface
+{
     /**
      * This is a String to be used in Logging (if/when you decide you
      * need it for debugging).
      */
-    public static final String TAG =
-        Logic.class.getName();
+    public static final String TAG=
+            Logic.class.getName();
 
     /**
      * This is the variable that stores our OutputInterface instance.
@@ -36,8 +40,9 @@ public class Logic
      * It assigns the passed in [MainActivity] instance (which
      * implements [OutputInterface]) to 'out'
      */
-    public Logic(OutputInterface out) {
-        mOut = out;
+    public
+    Logic ( OutputInterface out ) {
+        mOut=out;
     }
 
     /**
@@ -45,9 +50,31 @@ public class Logic
      * on-screen button labelled 'Process...' is pressed.
      */
     @Override
-    public void process() {
-        Account acct1 = new Account(mOut);
-        Account acct2 = new Account(mOut);
+    public
+    void process () {
+        Account acct1=new Account(mOut);
+        Account acct2=new Account(mOut);
+        /*
+          creating array of objects and filling with values
+         */
+        Account[] customer={new Account(mOut , "Rose Dior" , 389574) ,
+                new Account(mOut , "Lucy Lastic" , 847004) ,
+                new Account(mOut , "Viola Fuss" , 590432 , 182.90)};
+        for ( Account account : customer ) {
+            mOut.println(account.toString());
+        }
+
+        Account acctX=new Account(mOut , "Bob" , 674903 , 27.50);
+        // mOut.println(acctX.toString()); # uncomm. for print acctx.
+        tripleIt(acctX);
+        acctX.displayBalance();
+
+        // makes copy of existing object
+
+        Account acctY = new Account(mOut);
+        acctY.makeCopyOf(acctX);
+        acctY.setName("RazaHaider");
+        mOut.println(acctY.toString());
 
         /*acct1.name = "Bill";
         acct1.number = 738924;
@@ -80,17 +107,16 @@ public class Logic
         acct1.displayBalance();
 
 
-
-       // acct1.deposit(89.00);
-       // acct1.displayBalance();
+        // acct1.deposit(89.00);
+        // acct1.displayBalance();
 
        /* acct2.displayBalance();
         acct2.withdrawal(300);
         acct2.displayBalance();
 */
         // USing our own constructor
-        Account acctA = new Account(mOut , "Sue Vlaki",289476);
-        Account acctB = new Account(mOut , "Joseph schmoe", 392784,187.13);
+        Account acctA=new Account(mOut , "Sue Vlaki" , 289476);
+        Account acctB=new Account(mOut , "Joseph schmoe" , 392784 , 187.13);
 
         mOut.println(acct1.toString());
         mOut.println(acctB.toString());
